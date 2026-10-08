@@ -1,8 +1,6 @@
 # Relaylab
 
-**Queue delivery, under observation.**
-
-A deterministic, inspectable queue simulator. Follow a message from producer to worker to sink, lose its acknowledgment, and see why a successful retry can write the same effect twice.
+A small queue simulator for examining retries, expired delivery receipts, and duplicate writes. Adjust the scenario, step through worker deliveries, and inspect the event trace. The browser and CLI share the same deterministic engine.
 
 [Open the lab](https://miiduoa.github.io/relaylab/) · [Model and design](docs/model.md) · [Scenario format](docs/scenarios.md)
 
@@ -10,10 +8,10 @@ A deterministic, inspectable queue simulator. Follow a message from producer to 
 
 The first experiment starts at a deliberate ACK loss. Press **播放** to continue, select a delivery in the worker timeline, or scrub backward through the exact same event sequence. Turn on **冪等寫入**, apply the settings, and compare the result.
 
-| Default experiment | Deliveries | Committed effects | Duplicate effects |
-| --- | ---: | ---: | ---: |
-| Lost ACK, idempotency off | 13 | 13 | 1 |
-| Same scenario, idempotency on | 13 | 12 | 0 |
+| Default experiment            | Deliveries | Committed effects | Duplicate effects |
+| ----------------------------- | ---------: | ----------------: | ----------------: |
+| Lost ACK, idempotency off     |         13 |                13 |                 1 |
+| Same scenario, idempotency on |         13 |                12 |                 0 |
 
 The duplicate delivery is still there. The second write is what gets suppressed.
 
